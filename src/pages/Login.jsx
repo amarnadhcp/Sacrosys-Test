@@ -1,54 +1,83 @@
-import React from 'react'
-import Light from "../assets/light.svg"
+import React, { useState } from "react";
+import Macbook from "../assets/macBook.svg";
+import MacBg from "../assets/MacBg.svg";
+
 function Login() {
+
   return (
     <div className="bg-black h-screen">
-      <div className="flex justify-between">
-        <h1 className="text-white p-4">Logo</h1>
-        <img src={Light} className="p-4" alt="" />
+    <div className="max-w-7xl w-full mx-auto">
+      <div className="items-center p-4 flex justify-between">
+        <h1 className="text-white text-2xl p-4 cursor-pointer">Logo</h1>
+        <svg
+          className="cursor-pointer"
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+        >
+          <path
+            d="M7 9C7.55556 9 8.02778 8.80556 8.41667 8.41667C8.80556 8.02778 9 7.55556 9 7C9 6.44444 8.80556 5.97222 8.41667 5.58333C8.02778 5.19444 7.55556 5 7 5C6.44444 5 5.97222 5.19444 5.58333 5.58333C5.19444 5.97222 5 6.44444 5 7C5 7.55556 5.19444 8.02778 5.58333 8.41667C5.97222 8.80556 6.44444 9 7 9ZM7 9.66667C6.25727 9.66667 5.62714 9.40791 5.10962 8.89038C4.59209 8.37286 4.33333 7.74273 4.33333 7C4.33333 6.25727 4.59209 5.62714 5.10962 5.10962C5.62714 4.5921 6.25727 4.33333 7 4.33333C7.74273 4.33333 8.37286 4.5921 8.89038 5.10962C9.40791 5.62714 9.66667 6.25727 9.66667 7C9.66667 7.74273 9.40791 8.37286 8.89038 8.89038C8.37286 9.40791 7.74273 9.66667 7 9.66667ZM0.333333 7.33333C0.238889 7.33333 0.159722 7.30134 0.0958333 7.23737C0.0319444 7.1734 0 7.09413 0 6.99955C0 6.90497 0.0319444 6.82585 0.0958333 6.76218C0.159722 6.69851 0.238889 6.66667 0.333333 6.66667H2C2.09444 6.66667 2.17361 6.69866 2.2375 6.76263C2.30139 6.8266 2.33333 6.90587 2.33333 7.00045C2.33333 7.09503 2.30139 7.17415 2.2375 7.23782C2.17361 7.3015 2.09444 7.33333 2 7.33333H0.333333ZM12 7.33333C11.9056 7.33333 11.8264 7.30134 11.7625 7.23737C11.6986 7.1734 11.6667 7.09413 11.6667 6.99955C11.6667 6.90497 11.6986 6.82585 11.7625 6.76218C11.8264 6.69851 11.9056 6.66667 12 6.66667H13.6667C13.7611 6.66667 13.8403 6.69866 13.9042 6.76263C13.9681 6.8266 14 6.90587 14 7.00045C14 7.09503 13.9681 7.17415 13.9042 7.23782C13.8403 7.3015 13.7611 7.33333 13.6667 7.33333H12ZM6.99955 2.33333C6.90497 2.33333 6.82585 2.30139 6.76218 2.2375C6.69851 2.17361 6.66667 2.09444 6.66667 2V0.333333C6.66667 0.238889 6.69866 0.159722 6.76263 0.0958333C6.8266 0.0319444 6.90587 0 7.00045 0C7.09503 0 7.17415 0.0319444 7.23782 0.0958333C7.3015 0.159722 7.33333 0.238889 7.33333 0.333333V2C7.33333 2.09444 7.30134 2.17361 7.23737 2.2375C7.1734 2.30139 7.09413 2.33333 6.99955 2.33333ZM6.99955 14C6.90497 14 6.82585 13.9681 6.76218 13.9042C6.69851 13.8403 6.66667 13.7611 6.66667 13.6667V12C6.66667 11.9056 6.69866 11.8264 6.76263 11.7625C6.8266 11.6986 6.90587 11.6667 7.00045 11.6667C7.09503 11.6667 7.17415 11.6986 7.23782 11.7625C7.3015 11.8264 7.33333 11.9056 7.33333 12V13.6667C7.33333 13.7611 7.30134 13.8403 7.23737 13.9042C7.1734 13.9681 7.09413 14 6.99955 14ZM3.24102 3.68718L2.28077 2.75642C2.21581 2.69402 2.18397 2.61752 2.18525 2.52692C2.18654 2.43632 2.21968 2.35427 2.28467 2.28077C2.35557 2.20727 2.43418 2.17052 2.52052 2.17052C2.60684 2.17052 2.68547 2.20727 2.75642 2.28077L3.7 3.2282C3.77094 3.30171 3.80642 3.38034 3.80642 3.4641C3.80642 3.54787 3.77308 3.6265 3.70642 3.7C3.63975 3.7735 3.56389 3.80747 3.47885 3.80192C3.39381 3.79636 3.31453 3.75812 3.24102 3.68718ZM11.2436 11.7192L10.3 10.7718C10.2291 10.6983 10.1936 10.619 10.1936 10.534C10.1936 10.4489 10.2291 10.3709 10.3 10.3C10.3581 10.2265 10.4308 10.1925 10.518 10.1981C10.6051 10.2036 10.6855 10.2419 10.759 10.3128L11.7192 11.2436C11.7842 11.306 11.816 11.3825 11.8148 11.4731C11.8135 11.5637 11.7803 11.6457 11.7153 11.7192C11.6444 11.7927 11.5658 11.8295 11.4795 11.8295C11.3932 11.8295 11.3145 11.7927 11.2436 11.7192ZM10.3 3.70642C10.2265 3.63975 10.1925 3.56389 10.1981 3.47885C10.2036 3.39381 10.2419 3.31453 10.3128 3.24102L11.2436 2.28077C11.306 2.21581 11.3825 2.18397 11.4731 2.18525C11.5637 2.18654 11.6457 2.21968 11.7192 2.28467C11.7927 2.35557 11.8295 2.43418 11.8295 2.52052C11.8295 2.60684 11.7927 2.68547 11.7192 2.75642L10.7718 3.7C10.6983 3.77094 10.6197 3.80642 10.5359 3.80642C10.4521 3.80642 10.3735 3.77308 10.3 3.70642ZM2.28077 11.722C2.20727 11.6467 2.17052 11.5658 2.17052 11.4795C2.17052 11.3932 2.20727 11.3145 2.28077 11.2436L3.2282 10.3C3.30171 10.2291 3.38098 10.1936 3.46602 10.1936C3.55106 10.1936 3.62906 10.2291 3.7 10.3C3.76496 10.3581 3.79466 10.4308 3.7891 10.518C3.78354 10.6051 3.74957 10.6855 3.68718 10.759L2.75642 11.7192C2.68547 11.7927 2.60684 11.8288 2.52052 11.8276C2.43418 11.8263 2.35427 11.7911 2.28077 11.722Z"
+            fill="white"
+          />
+        </svg>
       </div>
-      <div className="md:flex">
-        <div className="w-1/2 md:flex hidden justify-center">
-          {/* <img src={Macbook} alt="" /> */}
+      <div className="flex">
+        <div className="relative w-1/2 lg:flex hidden justify-center">
+          <img
+            className="z-30 absolute -top-10 w-90pt"
+            src={Macbook}
+            alt=""
+          />
+          <img className="absolute w-80pt opacity-35" src={MacBg} />
         </div>
-        <div className="md:w-1/2">
-          <h1 className="text-white w-full mb-8 mt-12">
-            "Welcome to the future of restaurant reporting! We're serving up a <br />
-            fresh approach to streamline your restaurant management, making  
-            <span className="flex md:ml-32">data deliciously easy to digest."</span>
+        <div className="lg:w-1/2">
+          <h1 className="text-white text-center px-10 sm:px-48 lg:px-20 m-3 text-sm md:text-md sm:mb-8 sm:mt-12">
+            "Welcome to the future of restaurant reporting! We're serving up a
+            fresh approach to streamline your restaurant management, making
+            data deliciously easy to digest."
           </h1>
-          <div className="md:px-20">
-          <div className="bg-gray-700 p-8 rounded-lg flex flex-col gap-4 md:mr-40 md:grid-cols-2">
-            <div>
-              <input
-                type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                placeholder="Email"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                placeholder="Password"
-              />
-            </div>
-            <button
-              type="submit"
-              class="text-white bg-black font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          <div className="md:px-10">
+            <div
+              style={{
+                boxShadow: "0px 0px 50px 0px rgba(255, 255, 255, 0.25)",
+              }}
+              className="dark:bg-grayDark1 bg-gray-200 w-90pt mx-auto p-4 sm:p-8 rounded-3xl flex flex-col gap-4 0 md:grid-cols-2"
+            >
+              <div>
+                <input
+                  type="text"
+                  class="dark:bg-grayDark2 bg-gray-100 text-white focus:outline-dashed text-sm rounded-xl  block w-full p-3 sm:p-5"
+                  placeholder="Email"
+                />
+              </div>
+              <div>
+                <input
+                  type="password"
+                  class="bg-grayDark2 text-white text-sm focus:outline-dashed rounded-xl  block w-full p-3 sm:p-5"
+                  placeholder="Password"
+                />
+              </div>
+              <button
+                type="submit"
+                class="text-white  bg-black font-medium rounded-xl text-lg w-full sm:w-auto p-3 sm:px-6 sm:py-4 text-center"
               >
-              Login
-            </button>
-            <p className="text-center text-white">
-              By continuing. you agree to (name)’s Terms of service and Privacy
-              policy
-            </p>
+                Login
+              </button>
+              <p className="text-center text-xs sm:text-sm w-[20rem] mx-auto text-white">
+                By continuing. you agree to (name)’s{" "}
+                <span className="font-semibold">Terms of service</span> and
+                <span className="font-semibold">Privacy policy</span>
+              </p>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
-  )
+  </div>
+
+  );
 }
 
-export default Login
+export default Login;
