@@ -45,7 +45,7 @@ function Login() {
           if (user.password === values.password) {
             localStorage.setItem("authToken", "dummy_token_" + Date.now());
             localStorage.setItem("authTokenExpiration", (Date.now() + 3 * 60 * 1000).toString());
-            navigate("/");
+            navigate("/dashboard");
           } else {
             setLoginError("Incorrect password");
           }
