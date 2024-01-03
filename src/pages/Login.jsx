@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import Macbook from "../assets/macBook.svg";
+import Macbook from "../assets/MacBook.svg";
 import MacBg from "../assets/MacBg.svg";
 import useDarkTheme from "../utils/useDark";
 import userRequest from "../utils/userRequest";
-import { LoginSchema } from "../validation/Yup";
-import { useFormikValidation } from "../validation/Formik";
+import { LoginSchema } from "../validation/yup";
+import { useFormikValidation } from "../validation/formik";
 import { isAuthenticated } from "../utils/authentication";
 
 // Main Login component
