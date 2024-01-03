@@ -1,15 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import Macbook from "../assets/macBook.svg";
 import MacBg from "../assets/MacBg.svg";
-import useDarkTheme from "./useDark";
+import useDarkTheme from "../utils/useDark";
+import userRequest from "../utils/userRequest";
+import { LoginSchema } from "../validation/Yup";
+import { useFormikValidation } from "../validation/Formik";
+import { isAuthenticated } from "../utils/authentication";
 
+// Main Login component
 function Login() {
+  //  hooks and state variables
+  const navigate = useNavigate();
   const [colorTheme, setTheme] = useDarkTheme();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loginError, setLoginError] = useState(null);
+  const initialValues = { email: "", password: "" };
+
+   useEffect(() => {
+    // Check if the user is already authenticated
+    if (isAuthenticated()) {
+      console.log("authenticated");
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
+  //  function to toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  // mutation function using useMutation
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      console.log("API called");
+      return userRequest.get("/login", data);
+    },
+    // Handle success logic
+    onSuccess: (data) => {
+      if (Array.isArray(data.data) && data.data.length > 0) {
+        const user = data.data[0];
+        if (user && user.email === values.email) {
+          if (user.password === values.password) {
+            localStorage.setItem("authToken", "dummy_token_" + Date.now());
+            localStorage.setItem("authTokenExpiration", (Date.now() + 3 * 60 * 1000).toString());
+            navigate("/");
+          } else {
+            setLoginError("Incorrect password");
+          }
+        } else {
+          setLoginError("Email not found or doesn't match");
+        }
+      } else {
+        setLoginError("Unexpected response structure");
+      }
+    },
+    // Handle error logic
+    onError: (error) => {
+      setLoginError("Something went wrong");
+    },
+  });
+
+  //  Formik for form management and validation
+  const formik = useFormikValidation(mutation, LoginSchema, initialValues);
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } = formik;
+ 
+  // Render the login form and UI
   return (
     <div className="dark:bg-black  light:bg-gray-100 h-screen">
       <div className="max-w-7xl w-full mx-auto">
@@ -80,10 +137,20 @@ function Login() {
               >
                 <div>
                   <input
+                    name="email"
                     type="text"
                     className="dark:bg-grayDark2 bg-gray-100 dark:text-white text-gray-900 focus:outline-dashed text-sm rounded-xl  block w-full p-3 sm:p-5"
                     placeholder="Email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    error={touched.email && errors.email}
                   />
+                  {touched.email && errors.email && (
+                    <div className="text-red-500 text-sm py-1 text-center">
+                      {errors.email}
+                    </div>
+                  )}
                 </div>
                 <div className="relative">
                   {passwordVisible ? (
@@ -131,13 +198,28 @@ function Login() {
                     </svg>
                   )}
                   <input
+                    name="password"
                     type={passwordVisible ? "text" : "password"}
                     className="relative dark:bg-grayDark2 bg-gray-100 darK:text-white text-gray-900 text-sm focus:outline-dashed rounded-xl  block w-full py-3 ps-3 pe-16 sm:ps-5 sm:py-5"
                     placeholder="Password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                    error={touched.password && errors.password}
                   />
+                  {touched.password && errors.password && (
+                    <div className="text-red-500 text-sm py-1 text-center">
+                      {errors.password}
+                    </div>
+                  )}
                 </div>
+                {loginError && (
+                  <div className="text-red-500 text-sm py-1 text-center">
+                    {loginError}
+                  </div>
+                )}
                 <button
-                  type="submit"
+                  onClick={handleSubmit}
                   className="text-white  bg-black font-medium rounded-xl text-lg w-full sm:w-auto p-3 sm:px-6 sm:py-4 text-center"
                 >
                   Login
