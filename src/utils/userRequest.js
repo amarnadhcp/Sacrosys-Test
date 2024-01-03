@@ -6,7 +6,7 @@ const userRequest = axios.create({
 });
 
 
-
+export default userRequest;
 
 
 // future updation for attaching token in  Request Interceptor
