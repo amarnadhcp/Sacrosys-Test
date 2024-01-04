@@ -1,64 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function TopProduct() {
-  return (
-    <>
-      <div className="w-full flex mt-2 items-center mb-1">
-        <h1 className="w-20 text-sm">Chicken si..</h1>
-        <span style={{ width: "55%" }} className="bg-blue-200 rounded-r-lg">
-          <div
-            style={{ width: "100%", height: "8px" }}
-            className="h-full bg-blue-500 rounded-r-lg  flex justify-center"
-          ></div>
-        </span>
-        <span className="ml-2 text-xs flex text-center">55.5 AED/5 pc</span>
-      </div>
+  const [bars, setBars] = useState([]);
+  const [maxAED, setMaxAED] = useState(0);
+  const scaleFactor = 0.6; //  value to make the bars narrower for adjustmentttt
 
-      <div className="w-full flex  items-center mb-1">
-        <h1 className="w-20">Special b..</h1>
-        <span style={{ width: "40%" }} className=" bg-blue-200  rounded-r-lg">
-          <div
-            style={{ width: "100%", height: "8px" }}
-            className="h-full bg-orange-500 rounded-r-lg flex justify-center"
-          ></div>
+  useEffect(() => {
+    const calculateWidth = (amount) => {
+      const scaledWidth = (amount / maxAED) * 100 * scaleFactor;
+      return `${scaledWidth}%`;
+    };
+
+    const calculateScaleFactor = () => {
+      const max = Math.max(...products.map((product) => product.amount));
+      setMaxAED(max);
+    };
+
+    calculateScaleFactor();
+
+    const barsData = products.map((product, index) => (
+      <div key={index} className="w-full flex items-center mb-1 mt-2">
+        <h1 className="w-20 text-sm">{product.name}</h1>
+        <span style={{ width: calculateWidth(product.amount) }} className={`bg-blue-200 rounded-r-lg ${product.color}`}>
+          <div style={{ width: "100%", height: "8px" }} className={`h-full ${product.innerColor} rounded-r-lg flex justify-center`}></div>
         </span>
-        <span className="ml-2 text-xs flex text-center">55.5 AED/5 pc</span>
+        <span className="ml-2 text-xs flex text-center">{product.description}</span>
       </div>
-      <div className="w-full flex  items-center mb-1">
-        <h1 className="w-20">beef bico.</h1>
-        <span style={{ width: "30%" }} className=" bg-blue-200 rounded-r-lg ">
-          <div
-            style={{ width: "100%", height: "8px" }}
-            className="h-full bg-orange-600 rounded-r-lg flex justify-center"
-          ></div>
-        </span>
-        <span className="ml-2 text-xs flex text-center">55.5 AED/5 pc</span>
-      </div>
-      <div className="w-full flex  items-center mb-1">
-        <h1 className="w-20">beef ka..</h1>
-        <span style={{ width: "20%" }} className=" bg-blue-200 rounded-r-lg ">
-          <div
-            style={{ width: "100%", height: "8px" }}
-            className="h-full bg-red-600 rounded-r-lg flex justify-center"
-          ></div>
-        </span>
-        <span className="ml-2 text-xs flex text-center">55.5 AED/5 pc</span>
-      </div>
-      <div className="w-full flex  items-center mb-1">
-        <h1 className="w-20">beef br..</h1>
-        <span
-          style={{ width: "20%", height: "8px" }}
-          className=" bg-blue-200  rounded-r-lg"
-        >
-          <div
-            style={{ width: "100%" }}
-            className="h-full bg-purple-700 rounded-r-lg flex justify-center"
-          ></div>
-        </span>
-        <span className="ml-2 text-xs flex text-center">55.5 AED/5 pc</span>
-      </div>
-    </>
-  );
+    ));
+
+    setBars(barsData);
+  }, [products, maxAED]);
+
+  return <>{bars}</>;
 }
 
 export default TopProduct;
+
+
+
+
+
+
+const products = [
+  { name: 'Chicken si..', amount: 55.5, description: '55.5 AED/5 pc', color: 'bg-blue-200', innerColor: 'bg-blue-500' },
+  { name: 'Special b..', amount: 35, description: '35 AED/2 pc', color: 'bg-blue-200', innerColor: 'bg-orange-500' },
+  { name: 'beef bico..', amount: 29.75, description: '29.75 AED/3 pc', color: 'bg-blue-200', innerColor: 'bg-orange-600' },
+  { name: 'beef ka..', amount: 29.75, description: '29.75 AED/3 pc', color: 'bg-blue-200', innerColor: 'bg-red-600' },
+  { name: 'Beef br..', amount: 29.75, description: '29.75 AED/3 pc', color: 'bg-blue-200', innerColor: 'bg-purple-700' },
+];
