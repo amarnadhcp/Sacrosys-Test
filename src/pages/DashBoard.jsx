@@ -31,23 +31,23 @@ function DashBoard() {
 
   return (
     <>
-      <div className="md:flex bg-black">
+      <div className="md:flex dark:bg-black  bg-gray-100">
         <div className="md:w-3/5">
           <div className="md:flex mt-2 gap-x-2 md:gap-x-4 ">
             <div
-              className="rounded-lg p-4 mx-4 text-white"
+              className="rounded-lg p-4 mx-4 text-white  "
               style={{
                 backgroundColor: "rgba(20, 20, 20, 1)",
                 boxShadow: "0px 0px 10px 0px rgba(255, 255, 255, 0.25)",
               }}
             >
-              <div className="flex">
+              <div className="flex ">
                 <h1 className="text-xs mr-4">Today Sales</h1>
                 <img src={Calendar} alt="" />
               </div>
               <h1 className="text-cyan-300 text-xl mt-2">
                 {dashData.todaySales}{" "}
-                <span className="text-white text-xs">AED</span>
+                <span className=" text-white text-xs">AED</span>
               </h1>
               <div className="flex text-green-400">
                 <img
@@ -181,7 +181,7 @@ function DashBoard() {
           </div>
         </div>
       </div>
-      <div className="md:flex bg-black">
+      <div className="md:flex dark:bg-black">
         <div
           className="md:w-2/6 rounded-lg md:mx-0 mx-4 md:mt-2 md:ml-4 mt-4 relative text-white"
           style={{
