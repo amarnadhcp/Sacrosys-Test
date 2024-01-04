@@ -157,11 +157,11 @@ function DashBoard() {
             >
               <div className="flex flex-col gap-y-1 ">
                 <h1 className="font-semibold">Total Payments</h1>
-                <h1>Cash / 23</h1>
+                <h1>Cash / 12</h1>
                 <h1 className="text-red-400 text-xl">
                   322.61 <span className="text-white text-xs">AED</span>
                 </h1>
-                <h1>Credit / 11</h1>
+                <h1>Cheque / 2</h1>
                 <h1 className="text-orange-300 text-xl">
                   322.61 <span className="text-white text-xs">AED</span>
                 </h1>
