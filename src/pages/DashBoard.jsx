@@ -2,7 +2,7 @@ import React from "react";
 import Arrow from "../assets/arrow.svg";
 import Calendar from "../assets/calendar.svg";
 import LineChartGraph from "../components/graphs/LineChartGraph";
-import BarChartGraph from "../components/graphs/BarChartGraph";
+import SalesGraph from "../components/graphs/SalesGraph";
 import PieCharGraph from "../components/graphs/PieCharGraph";
 import TopProduct from "../components/graphs/TopProduct";
 import LeastProduct from "../components/graphs/LeastProduct";
@@ -127,7 +127,7 @@ function DashBoard() {
                   <h1>3%</h1>
                 </div>
               </div>
-              <BarChartGraph />
+              <SalesGraph />
             </div>
             <div
               className="md:w-3/12 rounded-lg p-4 md:mr-2 md:mx-0 mx-4 md:mt-0 mt-2  text-white"
@@ -157,11 +157,11 @@ function DashBoard() {
             >
               <div className="flex flex-col gap-y-1 ">
                 <h1 className="font-semibold">Total Payments</h1>
-                <h1>Cash / 23</h1>
+                <h1>Cash / 12</h1>
                 <h1 className="text-red-400 text-xl">
                   322.61 <span className="text-white text-xs">AED</span>
                 </h1>
-                <h1>Credit / 11</h1>
+                <h1>Cheque / 2</h1>
                 <h1 className="text-orange-300 text-xl">
                   322.61 <span className="text-white text-xs">AED</span>
                 </h1>

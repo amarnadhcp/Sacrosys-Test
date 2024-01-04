@@ -8,7 +8,7 @@ function LeastProduct() {
       <span style={{ width: "55%" }} className=" bg-blue-200 rounded-r-lg ">
         <div
           style={{ width: "100%",height: "8px"  }}
-          className="h-full bg-violet-500 rounded-r-lg  flex justify-center"
+          className="h-full bg-purple-700 rounded-r-lg  flex justify-center"
         >
         </div>
       </span>
@@ -30,6 +30,7 @@ function LeastProduct() {
       <span style={{ width: "30%" }} className=" bg-blue-200 rounded-r-lg ">
         <div
           style={{ width: "100%",height: "8px" }}
+
           className="h-full bg-rose-400 rounded-r-lg flex justify-center"
         >
         </div>
@@ -41,6 +42,7 @@ function LeastProduct() {
       <span style={{ width: "20%" }} className=" bg-blue-200 rounded-r-lg ">
         <div
           style={{ width: "100%",height: "8px" }}
+
           className="h-full bg-blue-500 rounded-r-lg flex justify-center"
         >
         </div>
