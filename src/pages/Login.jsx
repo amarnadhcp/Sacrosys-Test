@@ -8,6 +8,8 @@ import userRequest from "../utils/userRequest";
 import { LoginSchema } from "../validation/yup";
 import { useFormikValidation } from "../validation/formik";
 import { isAuthenticated } from "../utils/authentication";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Main Login component
 function Login() {
@@ -15,10 +17,9 @@ function Login() {
   const navigate = useNavigate();
   const [colorTheme, setTheme] = useDarkTheme();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [loginError, setLoginError] = useState(null);
   const initialValues = { email: "", password: "" };
 
-   useEffect(() => {
+  useEffect(() => {
     // Check if the user is already authenticated
     if (isAuthenticated()) {
       console.log("authenticated");
@@ -44,36 +45,38 @@ function Login() {
         if (user && user.email === values.email) {
           if (user.password === values.password) {
             localStorage.setItem("authToken", "dummy_token_" + Date.now());
-
-
-            localStorage.setItem("authTokenExpiration", (Date.now() + 3 * 60 * 1000).toString());
+            localStorage.setItem(
+              "authTokenExpiration",
+              (Date.now() + 3 * 60 * 1000).toString()
+            );
             navigate("/");
           } else {
-            setLoginError("Incorrect password");
+            toast.error("Incorrect password");
           }
         } else {
-          setLoginError("Email not found or doesn't match");
+          toast.error("Email not found or doesn't match");
         }
       } else {
-        setLoginError("Unexpected response structure");
+        toast.error("Unexpected response structure");
       }
     },
     // Handle error logic
     onError: (error) => {
-      setLoginError("Something went wrong");
+      toast.error("Something went wrong");
     },
   });
 
   //  Formik for form management and validation
   const formik = useFormikValidation(mutation, LoginSchema, initialValues);
-  const { values, errors, touched, handleBlur, handleSubmit, handleChange } = formik;
- 
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    formik;
+
   // Render the login form and UI
   return (
-    <div className="dark:bg-black  light:bg-gray-100 h-screen">
-      <div className="max-w-7xl w-full mx-auto">
-        <div className="items-center p-4 select-none flex justify-between">
-          <h1 className="dark:text-white text-gray-900 text-2xl p-4 cursor-pointer">
+    <div className="dark:bg-black overflow-hidden w-full h-screen bg-gray-100">
+      <div className="2xl:max-w-7xl h-fill-available xl:max-w-5xl  w-full mx-auto">
+        <div className="fixed  lg:top-4 max-w-7xl w-[80vw] items-center p-2 lg:p-4 select-none flex justify-between">
+          <h1 className="dark:text-white text-gray-900 text-2xl p-2 lg:p-4 cursor-pointer">
             Logo
           </h1>
           <div
@@ -82,7 +85,7 @@ function Login() {
           >
             {colorTheme == "dark" ? (
               <svg
-                className="w-4"
+                className="w-4 m-2"
                 xmlns="http://www.w3.org/2000/svg"
                 width="50"
                 height="50"
@@ -98,6 +101,7 @@ function Login() {
               </svg>
             ) : (
               <svg
+                className="m-4"
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
                 height="14"
@@ -112,25 +116,22 @@ function Login() {
             )}
           </div>
         </div>
-        <div className="flex select-none">
-          <div className="relative w-1/2 lg:flex hidden justify-center">
+
+        <div className="flex h-fill-available py-20 mx-5">
+          <div className="relative w-1/2 lg:flex hidden items-center justify-center select-none">
+            <img className="z-30 absolute" src={Macbook} alt="" />
             <img
-              className="z-30 absolute -top-10 w-90pt"
-              src={Macbook}
-              alt=""
-            />
-            <img
-              className="absolute w-80pt dark:opacity-35 opacity-7   0 filter invert dark:invert-0"
+              className="absolute w-90pt dark:opacity-35 opacity-7   0 filter invert dark:invert-0"
               src={MacBg}
             />
           </div>
-          <div className="lg:w-1/2">
-            <h1 className="dark:text-white text-gray-900 text-center px-10 sm:px-48 lg:px-20 m-3 text-sm md:text-md sm:mb-8 sm:mt-12">
+          <div className="lg:w-1/2 h-fill-available flex flex-col justify-center md:justify-around lg:justify-center">
+            <h1 className="dark:text-white text-gray-900 text-center px-10 sm:px-48 lg:px-20 mb-5  ">
               "Welcome to the future of restaurant reporting! We're serving up a
               fresh approach to streamline your restaurant management, making
               data deliciously easy to digest."
             </h1>
-            <div className="md:px-10">
+            <div className="md:px-10 mx-2">
               <div
                 style={{
                   boxShadow: "0px 0px 50px 0px rgba(255, 255, 255, 0.25)",
@@ -148,11 +149,15 @@ function Login() {
                     value={values.email}
                     error={touched.email && errors.email}
                   />
-                  {touched.email && errors.email && (
-                    <div className="text-red-500 text-sm py-1 text-center">
-                      {errors.email}
-                    </div>
-                  )}
+                  <div
+                    className={`${
+                      touched.email && errors.email
+                        ? "opacity-100 text-sm pt-1"
+                        : "opacity-0 text-xs"
+                    } text-red-500 text-center`}
+                  >
+                    {errors.email ? errors.email : "None"}
+                  </div>
                 </div>
                 <div className="relative">
                   {passwordVisible ? (
@@ -209,17 +214,16 @@ function Login() {
                     value={values.password}
                     error={touched.password && errors.password}
                   />
-                  {touched.password && errors.password && (
-                    <div className="text-red-500 text-sm py-1 text-center">
-                      {errors.password}
-                    </div>
-                  )}
-                </div>
-                {loginError && (
-                  <div className="text-red-500 text-sm py-1 text-center">
-                    {loginError}
+                  <div
+                    className={`${
+                      touched.password && errors.password
+                        ? "opacity-100 text-sm pt-1"
+                        : "opacity-0 text-xs"
+                    } text-red-500 text-center`}
+                  >
+                    {errors.password ? errors.password : "None"}
                   </div>
-                )}
+                </div>
                 <button
                   onClick={handleSubmit}
                   className="text-white  bg-black font-medium rounded-xl text-lg w-full sm:w-auto p-3 sm:px-6 sm:py-4 text-center"
