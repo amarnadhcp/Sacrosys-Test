@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Arrow from "../assets/arrow.svg";
 import Calendar from "../assets/calendar.svg";
 import LineChartGraph from "../components/graphs/LineChartGraph";
@@ -8,8 +8,21 @@ import TopProduct from "../components/graphs/TopProduct";
 import LeastProduct from "../components/graphs/LeastProduct";
 import userRequest from "../utils/userRequest";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+import { isAuthenticated } from "../utils/authentication";
 
 function DashBoard() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is already authenticated
+    if (!isAuthenticated()) {
+      console.log("Not-authenticated");
+      navigate("/Login");
+    }
+  }, [navigate]);
+ 
+  //user Query for data fetching get method
   const { isLoading, error, data } = useQuery({
     queryKey: ["department"],
     queryFn: () => userRequest.get("/dashboard").then((res) => res.data),
@@ -24,10 +37,8 @@ function DashBoard() {
     console.log(error);
     return <h1>erorrr</h1>;
   }
-
+  
   const dashData = data[0]; 
-
-  console.log(dashData);
 
   return (
     <>

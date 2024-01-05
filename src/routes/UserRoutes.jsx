@@ -9,7 +9,7 @@ function userRoutes() {
   return (
     <Routes>
       <Route path="/Login" element={<Login />} />
-      <Route exact path="/dashboard" element={<Layout/>} >
+      <Route exact path="/" element={<Layout/>} >
         <Route index element={<DashBoard/>} />
       </Route>
     </Routes>
