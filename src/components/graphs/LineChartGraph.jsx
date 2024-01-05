@@ -9,12 +9,12 @@ import {
   Label,
 } from "recharts";
 
-const uData = [1000, 1500, 2000, 2100, 1800, 1300, 1100, 1400, 1700, 1000];
+const uData = [1000, 1500, 2000, 2100, 1800, 1300, 1100, 1400, 1700, 1000 ];
 
 export default function LineChartGraph() {
   const data = uData.map((uv, index) => ({ index, AED: uv }));
 
-  const tooltipFormatter = (value, name) => [`${value} AED`, ];
+  const tooltipFormatter = (value, name) => [`${value} AED`];
 
   return (
     <LineChart width={600} height={325} data={data}>

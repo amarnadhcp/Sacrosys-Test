@@ -180,7 +180,7 @@ function DashBoard() {
             </div>
           </div>
         </div>
-        <div className="md:w-3/6 overflow-x-auto">
+        <div className="md:w-3/6">
           <div
             className="rounded-lg flex justify-center mx-4 text-white mt-2"
             style={{
