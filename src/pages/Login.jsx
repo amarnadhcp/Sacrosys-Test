@@ -23,7 +23,7 @@ function Login() {
     // Check if the user is already authenticated
     if (isAuthenticated()) {
       console.log("authenticated");
-      navigate("/dashboard");
+      navigate("/");
     }
   }, [navigate]);
 
@@ -49,7 +49,7 @@ function Login() {
               "authTokenExpiration",
               (Date.now() + 3 * 60 * 1000).toString()
             );
-            navigate("/dashboard");
+            navigate("/");
           } else {
             console.log("passsword wrong annee");
             toast.error("Incorrect password");

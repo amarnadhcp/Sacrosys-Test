@@ -7,7 +7,7 @@ function userRoutes() {
   return (
     <Routes>
       <Route path="/Login" element={<Login />} />
-      <Route path="/dashboard" element={<DashBoard />} />
+      <Route path="/" element={<DashBoard />} />
     </Routes>
   );
 }
