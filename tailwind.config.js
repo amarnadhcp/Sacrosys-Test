@@ -14,6 +14,10 @@ export default {
         grayDark1: "#2F2F2F",
         grayDark2: "#414141",
       },
+      height:{
+        'fill-available':"-webkit-fill-available",
+        '90pt': '90%',
+      },
       width: {
         '90pt': '90%',
         '80pt': '80%',
