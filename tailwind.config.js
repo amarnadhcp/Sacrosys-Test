@@ -18,6 +18,10 @@ export default {
       boxShadow: {
         custom: '0px 0px 10px 0px rgba(255, 255, 255, 0.25)', // Custom box shadow
       },
+      height:{
+        'fill-available':"-webkit-fill-available",
+        '90pt': '90%',
+      },
       width: {
         '90pt': '90%',
         '80pt': '80%',
